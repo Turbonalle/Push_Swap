@@ -281,21 +281,64 @@ void sort_three(int *aa, int *bb, int ia)
 
 //------------------------------------------------------------------------------ YOU'RE WORKING HERE!!!!!
 
+int rotations_to_top(int max_index, int index)
+{
+	int min_rotations;
+
+	if (max_index - index < index + 1)
+		min_rotations = max_index - index;
+	else
+		min_rotations = index + 1;
+	return (min_rotations);
+}
+
+int find_position(int *stack, int max_index, int index)
+{
+	
+}
+
 int count_steps(int *aa, int *bb, int index, int ib)
 {
 	int steps;
 	int min;
 	int max;
 	int ia;
+	int rot;
 
 	min = min_value(bb, ib);
 	max = max_value(bb, ib);
 	ia = max_index(aa);
 	if ((aa[index] > max || aa[index] < min) && bb[ib] == max)
 		steps = 1;										// pb
-	if (ia - )
+	else
+	{
+		rot = rotations_to_top(ia, index);
+		steps = rotations_to_top(find_position(bb, ib, index), index);
+	}
 	return (steps);
 }
+
+/*
+0	4
+1	2
+2	7	
+3	6	8
+4	1	3
+---------
+i	A	B
+
+- count least rotate steps for A
+- count least reverse steps for A
+- count least rotate steps for B
+- count least reverse steps for B
+(- optimize by checking if swapping means less steps in the future)
+- choose the smallest of the folowing:
+	- biggest of rotate A and rotate B
+	- biggest of reverse A and reverse B
+
+			
+*/
+
 
 //------------------------------------------------------------------------------ YOU'RE WORKING HERE!!!!!
 

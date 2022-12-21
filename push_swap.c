@@ -1,14 +1,5 @@
 #include "push_swap.h"
 
-typedef struct	s_data
-{
-	int		a_max;
-	int		a_min;
-	int		b_max;
-	int		b_min;
-}			t_data;
-
-
 //----COUNTING STUFF------------------------------------------------------------ OK!
 
 int max_index(int *stack)
@@ -66,11 +57,57 @@ int order(int *stack, int max_index)
 	i = -1;
 	while (++i < max_index)
 	{
-		if (stack[(min_value_index + i) % 3] > stack[(min_value_index + i + 1) % 3])
+		printf("Compare: %d, %d\n", stack[(min_value_index + i) % (max_index + 1)], stack[(min_value_index + i + 1) % (max_index + 1)]);
+		if (stack[(min_value_index + i) % (max_index + 1)] > stack[(min_value_index + i + 1) % (max_index + 1)])
+		{
+			printf("order: YES\n");
 			return (1);
+		}
 	}
+	printf("order: NO\n");
 	return (0);
 }
+
+/*
+Options for changing "order"-function:
+
+	while (s[...] > s[...])
+	{
+		if (i == max_index - 1)
+			return (1);
+		i++;
+	}
+	return (0);
+
+or:																				TRY THIS FIRST!
+
+	while (max_index2 > -1)
+	{
+		if (s[mvi % maxi+1] > s[mvi+1 % maxi+1])
+			return (0);
+		max_index2--;
+	}
+	return (1);
+
+*/
+
+/*
+
+order			sorted			half-sort		reverse			half-rev
+s[i]			3	2	1		2	1	3		1	2	3		3	1	2
+
+i				0	1	2		0	1	2		0	1	2		0	1	2
+mvi				2	2	2		1	1	1		0	0	0		1	1	1
+
+x=(mvi+i)%3		2	0	1		1	2	0		0	1	2		1	2	0
+y=(mvi+i+1)%3	0	1	2		2	0	1		1	2	0		2	0	1
+
+s[x]			1	3	2		1	3	2		1	2	3		1	2	3
+s[y]			3	2	1		3	2	1		2	3	1		2	3	1
+
+s[x] ? s[y]		<	>	>		<	>	>		<	<	>		<	<	>
+
+*/
 
 void sort_two(int *aa, int *bb, char c)
 {
@@ -194,20 +231,15 @@ void turk_sort(int *aa, int *bb)
 		sort_three(aa, bb, ia);
 	else
 	{
-		// Move up to 2 elements to B.
-		while (ia > 2 && ib < 1 && order(aa, ia))
+		while (ia > 2 && ib < 1 && !order(aa, ia))								// <- Move up to 2 elements to B.
 		{
-			printf("ia = %d, ib = %d\n", ia, ib);
 			push(aa, bb, 'b');
 			ia--;
 			ib++;
 		}
-		// Make sure B is in reversed order;
-		sort_two(aa, bb, 'b');
-		// Check best element to push, and push until A has 3 elements left.
-		// OPTIMIZE!!! Stop if A is in order.
-		while (ia > 2 && !order(aa, ia))
-		{
+		sort_two(aa, bb, 'b');													// <- Make sure B is in reversed order.
+		while (ia > 2 && !order(aa, ia))										// <- Check best element to push, and push until A has 3 elements left. (OPTIMIZE!!! Stop if A is in order.)
+		{																		// Should be "order(aa, ia)", not "!order(aa, ia)". Change it when order function is fixed!
 			i = index_to_push(aa, bb, ia, ib);
 			printf("ia = %d,\tindex to push = %d\n", ia, i);
 			//push_element(aa, bb, i);
@@ -242,20 +274,5 @@ ALGORITHM
 TO DO
 
 - Fix an order function that works with any size of stack (3 and bigger)
-
-
-order			sorted			half-sort		reverse			half-rev
-s[i]			3	2	1		2	1	3		1	2	3		3	1	2
-
-i				0	1	2		0	1	2		0	1	2		0	1	2
-mvi				2	2	2		1	1	1		0	0	0		1	1	1
-
-x=(mvi+i)%3		2	0	1		1	2	0		0	1	2		1	2	0
-y=(mvi+i+1)%3	0	1	2		2	0	1		1	2	0		2	0	1
-
-s[x]			1	3	2		1	3	2		1	2	3		1	2	3
-s[y]			3	2	1		3	2	1		2	3	1		2	3	1
-
-s[x] ? s[y]		<	>	>		<	>	>		<	<	>		<	<	>
 
 */

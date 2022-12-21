@@ -41,7 +41,11 @@ void test_order(int *stack, char c)
 {
 	int max_i;
 
-	printf("\n----------------------------------\n\nCHECKING IF STACK IS IN ORDER!\n\n");
+	if (c == 'a')
+		c = 'A';
+	if (c == 'b')
+		c = 'B';
+	printf("\n----------------------------------\n\nCHECKING IF STACK %c IS IN ORDER!\n\n", c);
 	max_i = max_index(stack);
 	if (order(stack, max_i))
 		printf("IN ORDER!\n");

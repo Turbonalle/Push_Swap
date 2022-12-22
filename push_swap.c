@@ -113,7 +113,7 @@ void push_element(int *aa, int *bb, int index)
 	ia = max_index(aa);
 	ib = max_index(bb);
 	pos_b = find_position_in_b(bb, ib, aa[index]);
-
+	// This is not considering different stack size of A and B
 	if ((ia - index) <= (index + 1) && (ib - pos_b) <= (pos_b + 1))
 		A_up_B_up(aa, bb, i, pos_b);
 	else if ((ia - index) <= (index + 1) && (ib - pos_b) > (pos_b + 1))
@@ -122,8 +122,6 @@ void push_element(int *aa, int *bb, int index)
 		A_down_B_up(aa, bb, i, pos_b);
 	else if ((ia - index) > (index + 1) && (ib - pos_b) > (pos_b + 1))
 		A_down_B_down(aa, bb, i, pos_b);
-	else if ((ia - index) == (index + 1) && (ib - pos_b) == (pos_b + 1))
-		A_mid_B_mid();
 	else if ((ia - index) == (index + 1) && (ib - pos_b) > (pos_b + 1))
 		A_mid_B_down();
 	else if ((ia - index) > (index + 1) && (ib - pos_b) == (pos_b + 1))

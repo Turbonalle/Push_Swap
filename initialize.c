@@ -1,7 +1,5 @@
 #include "push_swap.h"
 
-//----CREATING STACKS----------------------------------------------------------- OK!
-
 int *init_aa(int *aa)
 {
 	aa = malloc(sizeof(int));

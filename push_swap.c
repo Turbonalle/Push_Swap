@@ -1,119 +1,32 @@
 #include "push_swap.h"
 
-//----COUNTING STUFF------------------------------------------------------------ OK!
-
-int max_index(int *stack)
-{
-	int i;
-
-	i = 0;
-	while (stack[i] != 0)
-		i++;
-	return (i - 1);
-}
-
-int max_value(int *stack, int max_index)
-{
-	int max;
-
-	max = stack[max_index];
-	while (--max_index >= 0)
-	{
-		if (max < stack[max_index])
-			max = stack[max_index];
-	}
-	return (max);
-}
-
-int min_value(int *stack, int max_index)
-{
-	int min;
-
-	min = stack[max_index];
-	while (--max_index >= 0)
-	{
-		if (min > stack[max_index])
-			min = stack[max_index];
-	}
-	return (min);
-}
-
-
-//----SORTING ALGORITHMS--------------------------------------------------------
-
-
 int order(int *stack, int max_index)
 {
 	int min_value_index;
+	int max_value_index;
 	int i;
 
-	min_value_index = 0;
-	i = -1;
-	while (++i < (max_index + 1))
+	min_value_index = find_index_of_min_value(stack, max_index);
+	max_value_index = find_index_of_max_value(stack, max_index);
+	i = max_index;
+	while (i-- > 0)
 	{
-		if (stack[min_value_index] > stack[i])
-			min_value_index = i;
-	}
-	i = -1;
-	while (++i < max_index)
-	{
-		printf("Compare: %d, %d\n", stack[(min_value_index + i) % (max_index + 1)], stack[(min_value_index + i + 1) % (max_index + 1)]);
-		if (stack[(min_value_index + i) % (max_index + 1)] > stack[(min_value_index + i + 1) % (max_index + 1)])
+		if (stack[max_value_index % (max_index + 1)] < stack[(max_value_index + 1) % (max_index + 1)])
 		{
-			printf("order: YES\n");
-			return (1);
-		}
-	}
-	printf("order: NO\n");
-	return (0);
-}
-
-/*
-Options for changing "order"-function:
-
-	while (s[...] > s[...])
-	{
-		if (i == max_index - 1)
-			return (1);
-		i++;
-	}
-	return (0);
-
-or:																				TRY THIS FIRST!
-
-	while (max_index2 > -1)
-	{
-		if (s[mvi % maxi+1] > s[mvi+1 % maxi+1])
+			printf("order: NO\n");
 			return (0);
-		max_index2--;
+		}
+		max_value_index++;
 	}
+	printf("order: YES\n");
 	return (1);
-
-*/
-
-/*
-
-order			sorted			half-sort		reverse			half-rev
-s[i]			3	2	1		2	1	3		1	2	3		3	1	2
-
-i				0	1	2		0	1	2		0	1	2		0	1	2
-mvi				2	2	2		1	1	1		0	0	0		1	1	1
-
-x=(mvi+i)%3		2	0	1		1	2	0		0	1	2		1	2	0
-y=(mvi+i+1)%3	0	1	2		2	0	1		1	2	0		2	0	1
-
-s[x]			1	3	2		1	3	2		1	2	3		1	2	3
-s[y]			3	2	1		3	2	1		2	3	1		2	3	1
-
-s[x] ? s[y]		<	>	>		<	>	>		<	<	>		<	<	>
-
-*/
+}
 
 void sort_two(int *aa, int *bb, char c)
 {
-	if (c == 'a' && aa[0] < aa[1])
+	if (c == 'a' && aa[1] && aa[0] < aa[1])
 		swap(aa, bb, 'a');
-	if (c == 'b' && bb[0] > bb[1])
+	if (c == 'b' && bb[1] && bb[0] > bb[1])
 		swap(aa, bb, 'b');
 }
 
@@ -129,71 +42,43 @@ void sort_three(int *aa, int *bb, int ia)
 		rotate(aa, bb, 'a');
 }
 
-int rotations_to_top(int max_index, int index)
+int find_position_in_b(int *stack, int max_index, int value)
 {
-	int min_rotations;
+	int i;
 
-	if (max_index - index < index + 1)
-		min_rotations = max_index - index;
-	else
-		min_rotations = index + 1;
-	return (min_rotations);
+	i = max_index;
+	while (value < stack[i] && i > -1)
+		i--;
+	if (i == -1)
+		i = max_index;
+	return (i);
 }
 
-int find_position(int *stack, int max_index, int value)
+int count_steps(int *aa, int *bb, int index, int ib)							// Still have to check if rotating one stack and reversing the other is a better option!!!
 {
-	while (value > stack[max_index] && max_index > -1)
-		max_index--;
-	max_index++;
-	return (max_index);
-}
-
-//------------------------------------------------------------------------------ YOU'RE WORKING HERE!!!!!
-
-int count_steps(int *aa, int *bb, int index, int ib)
-{
-	int steps;
-	int min;
-	int max;
+	int pos_b;
+	int max_rot;
+	int max_rev;
 	int ia;
-	int rot;
-
-	min = min_value(bb, ib);
-	max = max_value(bb, ib);
+	
+	pos_b = find_position_in_b(bb, ib, aa[index]);
+	printf("CS:\tpos_b = %d\n", pos_b);
 	ia = max_index(aa);
-	if ((aa[index] > max || aa[index] < min) && bb[ib] == max)
-		steps = 1;										// pb
-	else
-	{
-		rot = rotations_to_top(ia, index);
-		steps = rotations_to_top(find_position(bb, ib, aa[index]), index);
-	}
-	return (steps);
+	// Calculate how many rots are needed
+	max_rot = ia - index;
+	if (max_rot < ib - pos_b)
+		max_rot = ib - pos_b;
+	// Calculate how many revs are needed
+	max_rev = index + 1;
+	if (max_rev < pos_b + 1)
+		max_rev = pos_b + 1;
+	// Return smaller one of max_rot and max_rev
+	if (max_rot > max_rev)
+		max_rot = max_rev;
+	return (max_rot + 1);
 }
 
-/*
-0	4
-1	2
-2	7	
-3	6	8	0
-4	1	3	1
---------------
-ia	A	B	ib
-
-- count least rotate steps for A
-- count least reverse steps for A
-- count least rotate steps for B
-- count least reverse steps for B
-(- optimize by checking if swapping means less steps in the future)
-- choose the smallest of the folowing:
-	- biggest of rotate A and rotate B
-	- biggest of reverse A and reverse B
-
-			
-*/
-
-
-//------------------------------------------------------------------------------ YOU'RE WORKING HERE!!!!!
+//------------------------------------------------------------------------------ YOU'RE WORKING HERE!!!!! v
 
 int index_to_push(int *aa, int *bb, int ia, int ib)
 {
@@ -202,12 +87,12 @@ int index_to_push(int *aa, int *bb, int ia, int ib)
 	int index;
 
 	least_steps = count_steps(aa, bb, ia, ib);
-	printf("ia = %d,\tleast_steps = %d\n", ia, least_steps);
+	printf("IP:\ti = %d,\tleast_steps = %d\n", ia, least_steps);
 	index = ia;
 	while (--ia > -1 && least_steps > 1)
 	{
 		steps = count_steps(aa, bb, ia, ib);
-		printf("ia = %d,\tsteps = %d\n", ia, steps);
+		printf("IP:\ti = %d,\tsteps = %d\n", ia, steps);
 		if (least_steps > steps)
 		{
 			least_steps = steps;
@@ -216,6 +101,49 @@ int index_to_push(int *aa, int *bb, int ia, int ib)
 	}
 	return (index);
 }
+
+void push_element(int *aa, int *bb, int index)
+{
+	int i;
+	int ia;
+	int ib;
+	int pos_b;
+
+	i = index;
+	ia = max_index(aa);
+	ib = max_index(bb);
+	pos_b = find_position_in_b(bb, ib, aa[index]);
+
+	if ((ia - index) <= (index + 1) && (ib - pos_b) <= (pos_b + 1))
+		A_up_B_up(aa, bb, i, pos_b);
+	else if ((ia - index) <= (index + 1) && (ib - pos_b) > (pos_b + 1))
+		A_up_B_down(aa, bb, i, pos_b);
+	else if ((ia - index) > (index + 1) && (ib - pos_b) <= (pos_b + 1))
+		A_down_B_up(aa, bb, i, pos_b);
+	else if ((ia - index) > (index + 1) && (ib - pos_b) > (pos_b + 1))
+		A_down_B_down(aa, bb, i, pos_b);
+	else if ((ia - index) == (index + 1) && (ib - pos_b) == (pos_b + 1))
+		A_mid_B_mid();
+	else if ((ia - index) == (index + 1) && (ib - pos_b) > (pos_b + 1))
+		A_mid_B_down();
+	else if ((ia - index) > (index + 1) && (ib - pos_b) == (pos_b + 1))
+		A_down_B_mid();
+	
+	push(aa, bb, 'b');
+}
+
+/*
+
+count_steps():
+
+	rot_a = ia - index;
+	rot_b = ib - find_position(bb, ib, aa[index]);
+	rev_a = index + 1;
+	rev_b = find_position(bb, ib, aa[index]) + 1;
+
+*/
+
+//------------------------------------------------------------------------------ YOU'RE WORKING HERE!!!!! ^
 
 void turk_sort(int *aa, int *bb)
 {
@@ -239,20 +167,21 @@ void turk_sort(int *aa, int *bb)
 		}
 		sort_two(aa, bb, 'b');													// <- Make sure B is in reversed order.
 		while (ia > 2 && !order(aa, ia))										// <- Check best element to push, and push until A has 3 elements left. (OPTIMIZE!!! Stop if A is in order.)
-		{																		// Should be "order(aa, ia)", not "!order(aa, ia)". Change it when order function is fixed!
+		{
 			i = index_to_push(aa, bb, ia, ib);
-			printf("ia = %d,\tindex to push = %d\n", ia, i);
-			//push_element(aa, bb, i);
+			printf("TS:\ti = %d,\tindex to push = %d\n", ia, i);
+			push_element(aa, bb, i);
 			ia--;
 			ib++;
 		}
-		/*
+		
 		// Sort A
 		sort_three(aa, bb, ia);
+		/*
 		// Push back to A. Arrange A if needed.
 		while (ib >= 0)
 		{
-			find_position(aa, bb, ib);
+			find_position_in_a(aa, bb, ib);
 			push(aa, bb, 'b');
 			ib--;
 		}
@@ -270,9 +199,15 @@ ALGORITHM
 	- Else, push it to the correct place
 - Push the element that require the least steps
 
+*/
 
-TO DO
+/*
 
-- Fix an order function that works with any size of stack (3 and bigger)
+count_steps():
+
+	rot_a = ia - index;
+	rot_b = ib - find_position(bb, ib, aa[index]);
+	rev_a = index + 1;
+	rev_b = find_position(bb, ib, aa[index]) + 1;
 
 */

@@ -1,8 +1,9 @@
-Push Swap
+PUSH SWAP
 
-In this project you're supposed to take in numbers as an input and put them in a stack, where the first argument will be the top of the stack.
+In this project you're supposed to create an algorithm that sorts a stack with the help of a second empty stack.
 
-SUMMARY
+
+RULES
 
 Input:
 - Numbers as arguments

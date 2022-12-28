@@ -3,18 +3,72 @@
 
 //----MAIN----------------------------------------------------------------------
 
+int check_if_int(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int check_int_minmax(long long num)
+{
+	if (num > INT_MAX || num < INT_MIN)
+		return (0);
+	return (1);
+}
+
+int check_duplicate(int *aa, int num)
+{
+	int i;
+
+	i = 0;
+	while (aa[i])
+	{
+		if (num == aa[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int main(int ac, char *av[])
 {
 	static int *aa;
 	static int *bb;
 	int i;
+	int num;
 
 	if (ac < 2)
 		return (0);
 	i = 0;
 	aa = init_aa(aa);
 	while (av[++i])
-		aa = create_aa(aa, atoi(av[i]), i);
+	{
+		if (!check_if_int(av[i]))
+		{
+			printf("Error!");
+			return (0);
+		}
+		num = atoi(av[i]);
+		if (!check_int_minmax(num))
+		{
+			printf("Error!");
+			return (0);
+		}
+		aa = create_aa(aa, num, i);
+		if (!check_duplicate(aa, num))
+		{
+			printf("Error!");
+			return (0);
+		}
+	}
 	bb = init_bb(bb, i);
 
 	printf("\n----------------------------------\n\nINITIAL STACKS!\n\n");

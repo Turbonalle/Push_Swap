@@ -1,4 +1,5 @@
 #include "push_swap.h"
+#include <limits.h>
 #include <stdio.h>
 
 //----MAIN----------------------------------------------------------------------
@@ -27,9 +28,11 @@ int check_int_minmax(long long num)
 int check_duplicate(int *aa, int num)
 {
 	int i;
+	int ia;
 
 	i = 0;
-	while (aa[i])
+	ia = max_index(aa);
+	while (i < ia)
 	{
 		if (num == aa[i])
 			return (0);
@@ -53,21 +56,21 @@ int main(int ac, char *av[])
 	{
 		if (!check_if_int(av[i]))
 		{
-			printf("Error!");
+			printf("Error! Not an int.\n");
 			return (0);
 		}
 		num = atoi(av[i]);
 		if (!check_int_minmax(num))
 		{
-			printf("Error!");
+			printf("Error! Over minmax.\n");
 			return (0);
 		}
 		aa = create_aa(aa, num, i);
-		if (!check_duplicate(aa, num))
-		{
-			printf("Error!");
-			return (0);
-		}
+		// if (!check_duplicate(aa, num))
+		// {
+		// 	printf("Error! There are duplicates.\n");
+		// 	return (0);
+		// }
 	}
 	bb = init_bb(bb, i);
 

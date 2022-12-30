@@ -55,8 +55,8 @@ void find_position_in_a(int *aa, int *bb, int ia, int ib)
 	else
 	{
 		printf("TEST!\nmax_a = %d\n", max_a);
-		while (bb[ib] < aa[max_a % ia])											// FIX THIS! IT LOOPS FOREVER!
-			max_a = (max_a + 1) % ia;
+		while (bb[ib] < aa[max_a % (ia + 1)])
+			max_a = (max_a + 1) % (ia + 1);
 		if (max_a == 0)
 			max_a = ia;
 		else

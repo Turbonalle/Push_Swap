@@ -2,8 +2,6 @@
 #include <limits.h>
 #include <stdio.h>
 
-//----MAIN----------------------------------------------------------------------
-
 int check_if_int(char *s)
 {
 	int i;
@@ -99,10 +97,9 @@ int main(int ac, char *av[])
 	display_stacks(aa, bb);
 	//test_sort_max_3(aa, bb);
 	//test_commands(aa, bb);
+	printf("\n----------------------------------\n\nCOMMANDS!\n\n");
 	turk_sort(aa, bb);
-	printf("\n");
+	printf("\n----------------------------------\n\nFINAL STACKS!\n\n");
 	display_stacks(aa, bb);
-	
-	//display_stacks(aa, bb);
 	return (0);
 }

@@ -3,6 +3,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <strings.h>
+# include <stdarg.h>
+# include <limits.h>
 
 int		smallest(int n, ...);
 int		smaller(int a, int b);
@@ -14,13 +16,12 @@ int		find_index_of_max_value(int *stack, int max_index);
 int		find_index_of_min_value(int *stack, int max_index);
 
 int		check_if_int(char *s);
-int		check_int_minmax(long long num);
+int		check_int_minmax(const char *str);
 int		check_duplicate(int *aa, int num);
 
 int		*init_aa(int *aa);
 int		*init_bb(int *bb, int i);
 int		*create_aa(int *ptr, int n, int len);
-void	display_stack(int *stack);
 void	display_stacks(int *aa, int *bb);
 
 void	swap(int *aa, int *bb, char c);
@@ -36,7 +37,7 @@ void	A_down_B_down(int *aa, int *bb, int index_a, int index_b);
 int		order(int *stack, int max_index);
 void	sort_two(int *aa, int *bb, char c);
 void	sort_three(int *aa, int *bb, int ia);
-int		rotations_to_top(int max_index, int index);
+void	find_position_in_a(int *aa, int *bb, int ia, int ib);
 int		find_position_in_b(int *stack, int max_index, int value);
 int		count_steps(int *aa, int *bb, int index, int ib);
 int		index_to_push(int *aa, int *bb, int ia, int ib);

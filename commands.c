@@ -20,7 +20,7 @@ void swap(int *aa, int *bb, char c)
 		bb[ib] = bb[ib] - bb[ib - 1];
 	}
 	printf("s%c\n", c);
-	display_stacks(aa, bb);
+	//display_stacks(aa, bb);
 }
 
 void push(int *aa, int *bb, char c)
@@ -41,7 +41,7 @@ void push(int *aa, int *bb, char c)
 		aa[ia] = 0;
 	}
 	printf("p%c\n", c);
-	display_stacks(aa, bb);
+	//display_stacks(aa, bb);
 }
 
 void rotate(int *aa, int *bb, char c)
@@ -67,7 +67,7 @@ void rotate(int *aa, int *bb, char c)
 		bb[0] = temp;
 	}
 	printf("r%c\n", c);
-	display_stacks(aa, bb);
+	//display_stacks(aa, bb);
 }
 
 void reverse(int *aa, int *bb, char c)
@@ -96,5 +96,5 @@ void reverse(int *aa, int *bb, char c)
 		bb[ib] = temp;
 	}
 	printf("rr%c\n", c);
-	display_stacks(aa, bb);
+	//display_stacks(aa, bb);
 }

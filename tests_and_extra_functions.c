@@ -11,12 +11,6 @@ void test_commands(int *aa, int *bb)
 	swap(aa, bb, 'a');
 	push(aa, bb, 'b');
 	rotate(aa, bb, 'r');
-	// push(aa, bb, 'b');
-	// push(aa, bb, 'b');
-	// rotate(aa, bb, 'r');
-	// reverse(aa, bb, 'r');
-	// push(aa, bb, 'a');
-	// reverse(aa, bb, 'a');
 }
 
 void test_sort_max_3(int *aa, int *bb)
@@ -51,4 +45,20 @@ void test_order(int *stack, char c)
 		printf("IN ORDER!\n");
 	if (!order(stack, max_i))
 		printf("NOT IN ORDER!\n");
+}
+
+void display_stacks(int *aa, int *bb)
+{
+	int i;
+	int size;
+
+	size = max_index(aa);
+	i = size;
+	size = max_index(bb);
+	if (i < size)
+		i = size;
+	i++;
+	while (--i > -1)
+		printf("aa[%d] = %d\tbb[%d] = %d\n", i, aa[i], i, bb[i]);
+	printf("\n");
 }

@@ -40,6 +40,20 @@ void sort_three(t_list *data)
 		rotate(data, 'a');
 }
 
+void sort_three_left(t_list *data)
+{
+	if (order(data) && data->stack_a[data->i_max_a] == min_value(data))
+		return;
+	if (!order(data))
+		swap(data, 'a');
+	if (order(data))
+		return;
+	if (data->stack_a[0] == min_value(data))
+		reverse(data, 'a');
+	if (data->stack_a[data->i_max_a] == max_value(data))
+		rotate(data, 'a');
+}
+
 void find_position_in_a(t_list *data)
 {
 	int min_a;
@@ -208,7 +222,7 @@ void turk_sort(t_list *data)
 			push_element(data, i);
 		}
 		if (data->i_max_a == 2 && !order(data))
-			sort_three(data);
+			sort_three_left(data);
 		while (data->i_max_b >= 0)
 		{
 			find_position_in_a(data);

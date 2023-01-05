@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   compare_numbers.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 12:08:29 by jbagger           #+#    #+#             */
+/*   Updated: 2023/01/05 12:47:16 by jbagger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int smallest(int n, ...)
+int	smallest(int n, ...)
 {
-	int min;
-	int current;
-	va_list ptr;
+	int		min;
+	int		current;
+	va_list	ptr;
 
 	va_start(ptr, n);
 	min = INT_MAX;
@@ -18,14 +30,14 @@ int smallest(int n, ...)
 	return (min);
 }
 
-int smaller(int a, int b)
+int	smaller(int a, int b)
 {
 	if (a <= b)
 		return (a);
 	return (b);
 }
 
-int bigger(int a, int b)
+int	bigger(int a, int b)
 {
 	if (a >= b)
 		return (a);

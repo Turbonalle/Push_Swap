@@ -1,64 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 12:08:50 by jbagger           #+#    #+#             */
+/*   Updated: 2023/01/05 15:23:41 by jbagger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int order(t_list *data)
+void	find_position_in_a(t_list *data)
 {
-	int max_value_index;
-	int i;
-
-	max_value_index = find_index_of_max_value(data);
-	i = data->i_max_a;
-	while (i-- > 0)
-	{
-		if (data->stack_a[max_value_index % (data->i_max_a + 1)] < data->stack_a[(max_value_index + 1) % (data->i_max_a + 1)])
-		{
-			printf("Order: NO!\n");
-			return (0);
-		}
-		max_value_index++;
-	}
-	printf("Order: YES!\n");
-	return (1);
-}
-
-void sort_two(t_list *data, char c)
-{
-	if (c == 'a' && data->i_max_a == 1 && data->stack_a[0] < data->stack_a[1])
-		swap(data, 'a');
-	if (c == 'b' && data->i_max_b == 1 && data->stack_b[0] > data->stack_b[1])
-		swap(data, 'b');
-}
-
-void sort_three(t_list *data)
-{
-	if (order(data) && data->stack_a[data->i_max_a] == min_value(data))
-		return;
-	if (!order(data))
-		swap(data, 'a');
-	if (data->stack_a[0] == min_value(data))
-		reverse(data, 'a');
-	if (data->stack_a[data->i_max_a] == max_value(data))
-		rotate(data, 'a');
-}
-
-void sort_three_left(t_list *data)
-{
-	if (order(data) && data->stack_a[data->i_max_a] == min_value(data))
-		return;
-	if (!order(data))
-		swap(data, 'a');
-	if (order(data))
-		return;
-	if (data->stack_a[0] == min_value(data))
-		reverse(data, 'a');
-	if (data->stack_a[data->i_max_a] == max_value(data))
-		rotate(data, 'a');
-}
-
-void find_position_in_a(t_list *data)
-{
-	int min_a;
-	int max_a;
-	int pos_a;
+	int	min_a;
+	int	max_a;
+	int	pos_a;
 	
 	max_a = find_index_of_max_value(data);
 	min_a = find_index_of_min_value(data);
@@ -74,21 +32,12 @@ void find_position_in_a(t_list *data)
 			max_a--;
 		pos_a = max_a;
 	}
-	if (data->i_max_a - pos_a <= pos_a + 1)
-	{
-		while (pos_a++ < data->i_max_a)
-			rotate(data, 'a');
-	}
-	else
-	{
-		while (pos_a-- >= 0)
-			reverse(data, 'a');
-	}
+	shift_a(data, pos_a);
 }
 
-int find_position_in_b(t_list *data, int value)
+int	find_position_in_b(t_list *data, int value)
 {
-	int i;
+	int	i;
 
 	i = data->i_max_b;
 	if (data->stack_b[0] > data->stack_b[i])
@@ -100,115 +49,52 @@ int find_position_in_b(t_list *data, int value)
 	return (i);
 }
 
-int count_steps(t_list *data, int index)
+int	count_steps(t_list *data, int index)
 {
-	int pos_b;
-	int rot_a;
-	int rot_b;
-	int rev_a;
-	int rev_b;
-	int rot;
-	int rev;
-	int aubd;
-	int adbu;
-	int min;
+	t_steps	list;
 
-	pos_b = find_position_in_b(data, data->stack_a[index]);
-
-	rot_a = data->i_max_a - index;
-	rot_b = data->i_max_b - pos_b;
-	rev_a = index + 1;
-	rev_b = pos_b + 1;
-
-	rot = bigger(rot_a, rot_b);
-	rev = bigger(rev_a, rev_b);
-	aubd = rot_a + rev_b;
-	adbu = rev_a + rot_b;
-	
-	min = smallest(4, rot, rev, aubd, adbu) + 1;
-	return (min);
+	list.pos_b = find_position_in_b(data, data->stack_a[index]);
+	list.rot_a = data->i_max_a - index;
+	list.rot_b = data->i_max_b - list.pos_b;
+	list.rev_a = index + 1;
+	list.rev_b = list.pos_b + 1;
+	list.rot = bigger(list.rot_a, list.rot_b);
+	list.rev = bigger(list.rev_a, list.rev_b);
+	list.aubd = list.rot_a + list.rev_b;
+	list.adbu = list.rev_a + list.rot_b;
+	return (smallest(4, list.rot, list.rev, list.aubd, list.adbu) + 1);
 }
 
-int index_to_push(t_list *data)
+void	push_element(t_list *data, int index)
 {
-	int least_steps;
-	int steps;
-	int index;
-	int i;
+	t_steps	list;
 
-	least_steps = count_steps(data, data->i_max_a);
-	index = data->i_max_a;
-	i = index;
-	while (--i > -1 && least_steps > 1)
-	{
-		steps = count_steps(data, i);
-		if (least_steps > steps)
-		{
-			least_steps = steps;
-			index = i;
-		}
-	}
-	return (index);
-}
-
-void push_element(t_list *data, int index)
-{
-	int pos_b;
-	int rot_a;
-	int rot_b;
-	int rev_a;
-	int rev_b;
-	int rot;
-	int rev;
-	int aubd;
-	int adbu;
-
-	pos_b = find_position_in_b(data, data->stack_a[index]);
-
-	rot_a = data->i_max_a - index;
-	rot_b = data->i_max_b - pos_b;
-	rev_a = index + 1;
-	rev_b = pos_b + 1;
-
-	rot = bigger(rot_a, rot_b);
-	rev = bigger(rev_a, rev_b);
-	aubd = rot_a + rev_b;
-	adbu = rev_a + rot_b;
-
-	if (rot <= rev && rot <= smaller(aubd, adbu))
-		A_up_B_up(data, index, pos_b);
-	else if (rev <= smaller(aubd, adbu))
-		A_down_B_down(data, index, pos_b);
-	else if (aubd <= adbu)
-		A_up_B_down(data, index, pos_b);
+	list.pos_b = find_position_in_b(data, data->stack_a[index]);
+	list.rot_a = data->i_max_a - index;
+	list.rot_b = data->i_max_b - list.pos_b;
+	list.rev_a = index + 1;
+	list.rev_b = list.pos_b + 1;
+	list.rot = bigger(list.rot_a, list.rot_b);
+	list.rev = bigger(list.rev_a, list.rev_b);
+	list.aubd = list.rot_a + list.rev_b;
+	list.adbu = list.rev_a + list.rot_b;
+	if (list.rot <= list.rev && list.rot <= smaller(list.aubd, list.adbu))
+		a_up_b_up(data, index, list.pos_b);
+	else if (list.rev <= smaller(list.aubd, list.adbu))
+		a_down_b_down(data, index, list.pos_b);
+	else if (list.aubd <= list.adbu)
+		a_up_b_down(data, index, list.pos_b);
 	else
-		A_down_B_up(data, index, pos_b);
-	
+		a_down_b_up(data, index, list.pos_b);
 	push(data, 'b');
 }
 
-void shift_a(t_list *data, int index)
+void	turk_sort(t_list *data)
 {
-	if ((data->i_max_a - index) <= (index + 1))
-	{
-		while (index++ < data->i_max_a)
-			rotate(data, 'a');
-	}
-	else
-	{
-		while (index-- >= 0)
-			reverse(data, 'a');
-	}
-}
+	int	i;
 
-void turk_sort(t_list *data)
-{
-	int i;
-
-	if (data->i_max_a == 1)
-		sort_two(data, 'a');
-	else if (data->i_max_a == 2)
-		sort_three(data);
+	if (data->i_max_a < 3)
+		sort_manual(data);
 	else
 	{
 		while (data->i_max_a > 2 && data->i_max_b < 1 && !order(data))
@@ -222,7 +108,7 @@ void turk_sort(t_list *data)
 			push_element(data, i);
 		}
 		if (data->i_max_a == 2 && !order(data))
-			sort_three_left(data);
+			make_stack_descending(data);
 		while (data->i_max_b >= 0)
 		{
 			find_position_in_a(data);

@@ -1,6 +1,19 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tests_and_extra_functions.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 12:09:08 by jbagger           #+#    #+#             */
+/*   Updated: 2023/01/05 15:43:08 by jbagger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void test_commands(t_list *data)
+#include "push_swap.h"
+#include <stdio.h>
+
+void	test_commands(t_list *data)
 {
 	rotate(data, 'a');
 	push(data, 'b');
@@ -15,7 +28,7 @@ void test_commands(t_list *data)
 	rotate(data, 'r');
 }
 
-void test_sort_max_3(t_list *data)
+void	test_sort_max_3(t_list *data)
 {
 	if (data->i_max_a == 1)
 		sort_two(data, 'a');
@@ -31,7 +44,7 @@ void test_sort_max_3(t_list *data)
 // 		c = 'A';
 // 	if (c == 'b')
 // 		c = 'B';
-// 	printf("\n----------------------------------\n\nCHECKING IF STACK %c IS IN ORDER!\n\n", c);
+// 	printf("\n----------------\n\nCHECKING IF STACK %c IS IN ORDER!\n\n", c);
 // 	max_i = max_index(stack);
 // 	if (order(stack, max_i))
 // 		printf("IN ORDER!\n");
@@ -67,10 +80,10 @@ void test_sort_max_3(t_list *data)
 // 	printf("\n");
 // }
 
-void display_stacks(t_list *data)
+void	display_stacks(t_list *data)
 {
-	int ia;
-	int ib;
+	int	ia;
+	int	ib;
 
 	ia = data->i_max_a;
 	ib = data->i_max_b;

@@ -1,8 +1,10 @@
 SHELL = /bin/bash
 NAME = libpush_swap.a
 MAIN = main.c
-EXE = a.out
-SRC = push_swap.c commands.c initialize.c find_values.c rotate_stacks.c compare_numbers.c tests_and_extra_functions.c
+EXE = push_swap
+SRC =	commands.c compare_numbers.c find_values.c initialize.c \
+		push_swap.c rotate_stacks.c sorting_functions.c \
+		tests_and_extra_functions.c validity_checks.c
 OBJECTS = *.o
 HEADER = push_swap.h
 FLAGS = -Wall -Wextra -Werror -g

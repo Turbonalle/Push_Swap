@@ -5,7 +5,7 @@ EXE = a.out
 SRC = push_swap.c commands.c initialize.c find_values.c rotate_stacks.c compare_numbers.c tests_and_extra_functions.c
 OBJECTS = *.o
 HEADER = push_swap.h
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 R = $$((RANDOM % 9 + 1))
 
 .PHONY: all run clean fclean re
@@ -13,20 +13,16 @@ R = $$((RANDOM % 9 + 1))
 all: $(NAME)
 
 $(NAME):
-	@$(MAKE) -C ../libft
-	@cp ../libft/libft.a $(NAME)
-	@cc $(FLAGS) -I $(HEADER) -c $(SRC)
+	@cc $(FLAGS) $(HEADER) -c $(SRC)
 	@ar rcs $(NAME) $(OBJECTS)
 	@echo "Push_swap compiled!"
-	@gcc $(MAIN) $(NAME) -o $(EXE)
+	@gcc $(MAIN) $(NAME) -o $(EXE) -g
 
 clean: $(OBJECTS)
-	@$(MAKE) clean -C ../libft
 	@rm -f $(OBJECTS)
 	@echo "Object files removed!"
 
 fclean: clean
-	@$(MAKE) fclean -C ../libft
 	@rm -f $(NAME) $(EXE)
 	@echo "Library removed!"
 

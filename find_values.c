@@ -1,66 +1,60 @@
 #include "push_swap.h"
 
-int max_index(int *stack)
+int max_value(t_list *data)
 {
 	int i;
-
-	i = 0;
-	while (stack[i] != 0)
-		i++;
-	return (i - 1);
-}
-
-int max_value(int *stack, int max_index)
-{
 	int max;
 
-	max = stack[max_index];
-	while (--max_index >= 0)
+	i = data->i_max_a;
+	max = data->stack_a[i];
+	while (--i >= 0)
 	{
-		if (max < stack[max_index])
-			max = stack[max_index];
+		if (max < data->stack_a[i])
+			max = data->stack_a[i];
 	}
 	return (max);
 }
 
-int min_value(int *stack, int max_index)
+int min_value(t_list *data)
 {
+	int i;
 	int min;
 
-	min = stack[max_index];
-	while (--max_index >= 0)
+	i = data->i_max_a;
+	min = data->stack_a[i];
+	while (--i >= 0)
 	{
-		if (min > stack[max_index])
-			min = stack[max_index];
+		if (min > data->stack_a[i])
+			min = data->stack_a[i];
 	}
 	return (min);
 }
 
-int find_index_of_max_value(int *stack, int max_index)
+int find_index_of_max_value(t_list *data)
 {
 	int max_value_index;
 	int i;
 
 	max_value_index = 0;
 	i = -1;
-	while (++i < (max_index + 1))
+	while (++i < (data->i_max_a + 1))
 	{
-		if (stack[max_value_index] < stack[i])
+		if (data->stack_a[max_value_index] < data->stack_a[i])
 			max_value_index = i;
 	}
 	return (max_value_index);
 }
 
-int find_index_of_min_value(int *stack, int max_index)
+int find_index_of_min_value(t_list *data)
 {
 	int min_value_index;
 	int i;
 
 	min_value_index = 0;
 	i = -1;
-	while (++i < (max_index + 1))
+	while (++i < (data->i_max_a + 1))
 	{
-		if (stack[min_value_index] > stack[i])
+		if (data->stack_a[min_value_index] > data->stack_a[i])
 			min_value_index = i;
 	}
 	return (min_value_index);

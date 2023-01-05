@@ -46,60 +46,52 @@ int check_int_minmax(const char *str)
 	return (1);
 }
 
-int check_duplicate(int *aa, int num)
+int check_duplicate(t_list *data, int i, int num)
 {
-	int ia;
-
-	ia = max_index(aa);
-	while (ia > 0)
+	if (i < data->i_max_a)
 	{
-		if (aa[ia] == num)
-			return (0);
-		ia--;
+		while (++i <= data->i_max_a)
+		{
+			if (num == data->stack_a[i])
+				return (0);
+		}		
 	}
 	return (1);
 }
 
 int main(int ac, char *av[])
 {
-	static int *aa;
-	static int *bb;
 	int i;
 	int num;
+	t_list data;
 
 	if (ac < 2)
 		return (0);
 	i = 0;
-	aa = init_aa(aa);
-	while (av[++i])
+	init_list(&data, ac - 1);
+	while (i + 1 < ac)
 	{
-		if (!check_if_int(av[i]))
+		if (!check_if_int(av[i + 1]))
 		{
 			printf("Error! Not an int.\n");
 			return (0);
 		}
-		if (!check_int_minmax(av[i]))
+		if (!check_int_minmax(av[i + 1]))
 		{
 			printf("Error! Over minmax.\n");
 			return (0);
 		}
-		num = atoi(av[i]);
-		aa = create_aa(aa, num, i);
-		if (!check_duplicate(aa, num))
+		num = atoi(av[i + 1]);
+		data.stack_a[data.i_max_a - i] = num;
+		if (!check_duplicate(&data, data.i_max_a - i, num))
 		{
 			printf("Error! There are duplicates.\n");
 			return (0);
 		}
+		i++;
 	}
-	bb = init_bb(bb, i);
-
-	printf("\n----------------------------------\n\nINITIAL STACKS!\n\n");
-	display_stacks(aa, bb);
-	//test_sort_max_3(aa, bb);
-	//test_commands(aa, bb);
-	printf("\n----------------------------------\n\nCOMMANDS!\n\n");
-	turk_sort(aa, bb);
-	printf("\n----------------------------------\n\nFINAL STACKS!\n\n");
-	display_stacks(aa, bb);
+	display_stacks(&data);
+	turk_sort(&data);
+	//display_stacks(&data);
 	return (0);
 }

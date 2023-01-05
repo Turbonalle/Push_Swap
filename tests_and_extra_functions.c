@@ -1,64 +1,85 @@
 #include "push_swap.h"
 
-//----TESTS---------------------------------------------------------------
-
-void test_commands(int *aa, int *bb)
+void test_commands(t_list *data)
 {
-	printf("\n----------------------------------\n\nTESTING COMMANDS!\n\n");
-	rotate(aa, bb, 'a');
-	push(aa, bb, 'b');
-	push(aa, bb, 'b');
-	swap(aa, bb, 'a');
-	push(aa, bb, 'b');
-	rotate(aa, bb, 'r');
+	rotate(data, 'a');
+	push(data, 'b');
+	push(data, 'b');
+	push(data, 'b');
+	push(data, 'b');
+	push(data, 'b');
+	swap(data, 's');
+	reverse(data, 'r');
+	push(data, 'a');
+	swap(data, 'a');
+	rotate(data, 'r');
 }
 
-void test_sort_max_3(int *aa, int *bb)
+void test_sort_max_3(t_list *data)
 {
-	int min_a;
-	int max_a;
+	if (data->i_max_a == 1)
+		sort_two(data, 'a');
+	if (data->i_max_a == 2)
+		sort_three(data);
+}
+
+// void test_order(int *stack, char c)
+// {
+// 	int max_i;
+
+// 	if (c == 'a')
+// 		c = 'A';
+// 	if (c == 'b')
+// 		c = 'B';
+// 	printf("\n----------------------------------\n\nCHECKING IF STACK %c IS IN ORDER!\n\n", c);
+// 	max_i = max_index(stack);
+// 	if (order(stack, max_i))
+// 		printf("IN ORDER!\n");
+// 	if (!order(stack, max_i))
+// 		printf("NOT IN ORDER!\n");
+// }
+
+// void display_stacks(t_list *data)
+// {
+// 	int ia;
+// 	int ib;
+
+// 	ia = data->i_max_a;
+// 	ib = data->i_max_b;
+// 	printf("\n");
+// 	while (ia > ib)
+// 	{
+// 		printf("%d\n",data->stack_a[ia]);
+// 		ia--;
+// 	}
+// 	while (ia < ib)
+// 	{
+// 		printf("\t%d\n",data->stack_b[ib]);
+// 		ib--;
+// 	}
+// 	while (ia > -1)
+// 	{
+// 		printf("%d\t%d\n",data->stack_a[ia], data->stack_b[ia]);
+// 		ia--;
+// 	}
+// 	printf("----------------\n");
+// 	printf("A\tB\n");
+// 	printf("\n");
+// }
+
+void display_stacks(t_list *data)
+{
 	int ia;
 	int ib;
 
-	ia = max_index(aa);
-	ib = max_index(bb);
-	min_a = min_value(aa, ia);
-	max_a = max_value(aa, ia);
-	printf("\n----------------------------------\n\nSORTING IF STACK IS MAX 3!\n\n");
-	if (ia == 1)
-		sort_two(aa, bb, ia);
-	if (ia == 2)
-		sort_three(aa, bb, ia);
-}
-
-void test_order(int *stack, char c)
-{
-	int max_i;
-
-	if (c == 'a')
-		c = 'A';
-	if (c == 'b')
-		c = 'B';
-	printf("\n----------------------------------\n\nCHECKING IF STACK %c IS IN ORDER!\n\n", c);
-	max_i = max_index(stack);
-	if (order(stack, max_i))
-		printf("IN ORDER!\n");
-	if (!order(stack, max_i))
-		printf("NOT IN ORDER!\n");
-}
-
-void display_stacks(int *aa, int *bb)
-{
-	int i;
-	int size;
-
-	size = max_index(aa);
-	i = size;
-	size = max_index(bb);
-	if (i < size)
-		i = size;
-	i++;
-	while (--i > -1)
-		printf("aa[%d] = %d\tbb[%d] = %d\n", i, aa[i], i, bb[i]);
+	ia = data->i_max_a;
+	ib = data->i_max_b;
+	if (ia < ib)
+		ia = ib;
+	while (ia > -1)
+	{
+		printf("aa[%d] = %d\tbb[%d] = %d\n", ia, data->stack_a[ia], ia, data->stack_b[ia]);
+		ia--;
+	}
 	printf("\n");
 }

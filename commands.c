@@ -1,100 +1,89 @@
 #include "push_swap.h"
 
-void swap(int *aa, int *bb, char c)
+void swap(t_list *data, char c)
 {
-	int ia;
-	int ib;
-
-	ia = max_index(aa);
-	ib = max_index(bb);
-	if (ia > 0 && (c == 'a' || c == 's'))
+	if (data->i_max_a > 0 && (c == 'a' || c == 's'))
 	{
-		aa[ia] = aa[ia] + aa[ia - 1];
-		aa[ia - 1] = aa[ia] - aa[ia - 1];
-		aa[ia] = aa[ia] - aa[ia - 1];
+		data->stack_a[data->i_max_a] = data->stack_a[data->i_max_a] + data->stack_a[data->i_max_a - 1];
+		data->stack_a[data->i_max_a - 1] = data->stack_a[data->i_max_a] - data->stack_a[data->i_max_a - 1];
+		data->stack_a[data->i_max_a] = data->stack_a[data->i_max_a] - data->stack_a[data->i_max_a - 1];
 	}
-	if (ib > 0 && (c == 'b' || c == 's'))
+	if (data->i_max_b > 0 && (c == 'b' || c == 's'))
 	{
-		bb[ib] = bb[ib] + bb[ib - 1];
-		bb[ib - 1] = bb[ib] - bb[ib - 1];
-		bb[ib] = bb[ib] - bb[ib - 1];
+		data->stack_b[data->i_max_b] = data->stack_b[data->i_max_b] + data->stack_b[data->i_max_b - 1];
+		data->stack_b[data->i_max_b - 1] = data->stack_b[data->i_max_b] - data->stack_b[data->i_max_b - 1];
+		data->stack_b[data->i_max_b] = data->stack_b[data->i_max_b] - data->stack_b[data->i_max_b - 1];
 	}
 	printf("s%c\n", c);
-	//display_stacks(aa, bb);
+	display_stacks(data);
 }
 
-void push(int *aa, int *bb, char c)
+void push(t_list *data, char c)
 {
-	int ia;
-	int ib;
-
-	ia = max_index(aa);
-	ib = max_index(bb);
-	if (c == 'a' && bb[0])
+	if (c == 'a' && data->i_max_b >= 0)
 	{
-		aa[ia + 1] = bb[ib];
-		bb[ib] = 0;
+		data->i_max_a++;
+		data->stack_a[data->i_max_a] = data->stack_b[data->i_max_b];
+		data->stack_b[data->i_max_b] = 0;
+		data->i_max_b--;
 	}
-	if (c == 'b' && aa[0])
+	if (c == 'b' && data->i_max_a >= 0)
 	{
-		bb[ib + 1] = aa[ia];
-		aa[ia] = 0;
+		data->i_max_b++;
+		data->stack_b[data->i_max_b] = data->stack_a[data->i_max_a];
+		data->stack_a[data->i_max_a] = 0;
+		data->i_max_a--;
 	}
 	printf("p%c\n", c);
-	//display_stacks(aa, bb);
+	display_stacks(data);
 }
 
-void rotate(int *aa, int *bb, char c)
+void rotate(t_list *data, char c)
 {
 	int temp;
-	int ia;
-	int ib;
-
-	ia = max_index(aa);
-	ib = max_index(bb);
-	if (ia > 0 && (c == 'a' || c == 'r'))
-	{
-		temp = aa[ia];
-		while (--ia >= 0)
-			aa[ia + 1] = aa[ia];
-		aa[0] = temp;
-	}
-	if (ib > 0 && (c == 'b' || c == 'r'))
-	{
-		temp = bb[ib];
-		while (--ib >= 0)
-			bb[ib + 1] = bb[ib];
-		bb[0] = temp;
-	}
-	printf("r%c\n", c);
-	//display_stacks(aa, bb);
-}
-
-void reverse(int *aa, int *bb, char c)
-{
-	int temp;
-	int ia;
-	int ib;
 	int i;
 
-	ia = max_index(aa);
-	ib = max_index(bb);
-	if (ia > 0 && (c == 'a' || c == 'r'))
+	if (data->i_max_a > 0 && (c == 'a' || c == 'r'))
 	{
-		i = -1;
-		temp = aa[0];
-		while (++i < ia)
-			aa[i] = aa[i + 1];
-		aa[ia] = temp;
+		temp = data->stack_a[data->i_max_a];
+		i = data->i_max_a;
+		while (--i >= 0)
+			data->stack_a[i + 1] = data->stack_a[i];
+		data->stack_a[0] = temp;
 	}
-	if (ib > 0 && (c == 'b' || c == 'r'))
+	if (data->i_max_b > 0 && (c == 'b' || c == 'r'))
+	{
+		temp = data->stack_b[data->i_max_b];
+		i = data->i_max_b;
+		while (--i >= 0)
+			data->stack_b[i + 1] = data->stack_b[i];
+		data->stack_b[0] = temp;
+	}
+	printf("r%c\n", c);
+	display_stacks(data);
+}
+
+void reverse(t_list *data, char c)
+{
+	int temp;
+	int i;
+
+	if (data->i_max_a > 0 && (c == 'a' || c == 'r'))
 	{
 		i = -1;
-		temp = bb[0];
-		while (++i < ib)
-			bb[i] = bb[i + 1];
-		bb[ib] = temp;
+		temp = data->stack_a[0];
+		while (++i < data->i_max_a)
+			data->stack_a[i] = data->stack_a[i + 1];
+		data->stack_a[data->i_max_a] = temp;
+	}
+	if (data->i_max_b > 0 && (c == 'b' || c == 'r'))
+	{
+		i = -1;
+		temp = data->stack_b[0];
+		while (++i < data->i_max_b)
+			data->stack_b[i] = data->stack_b[i + 1];
+		data->stack_b[data->i_max_b] = temp;
 	}
 	printf("rr%c\n", c);
-	//display_stacks(aa, bb);
+	display_stacks(data);
 }

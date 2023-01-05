@@ -6,7 +6,7 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:08:50 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/05 15:23:41 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:08:41 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@ void	find_position_in_a(t_list *data)
 	int	min_a;
 	int	max_a;
 	int	pos_a;
-	
+	int	top_b;
+
+	top_b = data->stack_b[data->i_max_b];
 	max_a = find_index_of_max_value(data);
 	min_a = find_index_of_min_value(data);
-	if (data->stack_b[data->i_max_b] > data->stack_a[max_a] || data->stack_b[data->i_max_b] < data->stack_a[min_a])
+	if (top_b > data->stack_a[max_a] || top_b < data->stack_a[min_a])
 		pos_a = min_a;
 	else
 	{
-		while (data->stack_b[data->i_max_b] < data->stack_a[max_a % (data->i_max_a + 1)])
+		while (top_b < data->stack_a[max_a % (data->i_max_a + 1)])
 			max_a = (max_a + 1) % (data->i_max_a + 1);
 		if (max_a == 0)
 			max_a = data->i_max_a;

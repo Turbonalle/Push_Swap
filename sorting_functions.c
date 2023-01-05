@@ -6,7 +6,7 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:52:38 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/05 15:46:35 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:10:44 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	sort_two(t_list *data, char c)
 void	sort_three(t_list *data)
 {
 	if (order(data) && data->stack_a[data->i_max_a] == min_value(data))
-		return;
+		return ;
 	if (!order(data))
 		swap(data, 'a');
 	if (data->stack_a[0] == min_value(data))
@@ -32,7 +32,7 @@ void	sort_three(t_list *data)
 		rotate(data, 'a');
 }
 
-void sort_manual(t_list *data)
+void	sort_manual(t_list *data)
 {
 	if (data->i_max_a == 1)
 		sort_two(data, 'a');
@@ -43,11 +43,11 @@ void sort_manual(t_list *data)
 void	make_stack_descending(t_list *data)
 {
 	if (order(data) && data->stack_a[data->i_max_a] == min_value(data))
-		return;
+		return ;
 	if (!order(data))
 		swap(data, 'a');
 	if (order(data))
-		return;
+		return ;
 	if (data->stack_a[0] == min_value(data))
 		reverse(data, 'a');
 	if (data->stack_a[data->i_max_a] == max_value(data))

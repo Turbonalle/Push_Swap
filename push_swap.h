@@ -6,7 +6,7 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:08:56 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/05 15:41:47 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:09:53 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_steps
 	int	aubd;
 	int	adbu;
 }		t_steps;
-
 int		smallest(int n, ...);
 int		smaller(int a, int b);
 int		bigger(int a, int b);
@@ -46,23 +45,18 @@ int		max_value(t_list *data);
 int		min_value(t_list *data);
 int		find_index_of_max_value(t_list *data);
 int		find_index_of_min_value(t_list *data);
-
 int		check_if_int(char *s);
 int		check_int_minmax(const char *str);
 int		check_duplicate(t_list *data, int i, int num);
-
 int		init_list(t_list *data, int size);
-
 void	swap(t_list *data, char c);
 void	push(t_list *data, char c);
 void	rotate(t_list *data, char c);
 void	reverse(t_list *data, char c);
-
 void	a_up_b_up(t_list *data, int index_a, int index_b);
 void	a_up_b_down(t_list *data, int index_a, int index_b);
 void	a_down_b_up(t_list *data, int index_a, int index_b);
 void	a_down_b_down(t_list *data, int index_a, int index_b);
-
 int		order(t_list *data);
 void	sort_two(t_list *data, char c);
 void	sort_three(t_list *data);
@@ -74,10 +68,7 @@ int		index_to_push(t_list *data);
 void	push_element(t_list *data, int index);
 void	shift_a(t_list *data, int index);
 void	make_stack_descending(t_list *data);
-
-
 void	turk_sort(t_list *data);
-
 void	test_commands(t_list *data);
 void	test_sort_max_3(t_list *data);
 void	test_order(int *stack, char c);

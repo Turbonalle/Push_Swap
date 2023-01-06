@@ -19,7 +19,7 @@ int	order(t_list *data)
 	int	max_value_index;
 	int	i;
 
-	max_value_index = find_index_of_max_value(data);
+	max_value_index = find_index_of_max_value(data, 'a');
 	i = data->i_max_a;
 	while (i-- > 0)
 	{
@@ -39,40 +39,20 @@ int rev_order(t_list *data)
 	int	max_value_index;
 	int	i;
 
+	max_value_index = find_index_of_min_value(data, 'b');
 	i = data->i_max_b;
-	max_value_index = find_index_of_max_value(data);
-	printf("max_value_index: start = %d\n", max_value_index);
-	while (--i > 0)
+	//printf("max_value_index: start = %d\n", max_value_index);
+	while (i-- > 0)
 	{
-		max_value_index = (max_value_index + 1) % (data->i_max_b + 1);
-		under = data->stack_b[max_value_index];
-		above = data->stack_b[max_value_index + 1];
-		printf("under = %d, above = %d\n", under, above);
+		under = data->stack_b[(max_value_index) % (data->i_max_b + 1)];
+		above = data->stack_b[(max_value_index + 1) % (data->i_max_b + 1)];
+		//printf("under = %d, above = %d\n", under, above);
 		if (under > above)
 			return (0);
+		max_value_index++;
 	}
 	return (1);
 }
-
-// int rev_order(t_list *data)
-// {
-// 	int	under;
-// 	int	above;
-// 	int	max_value_index;
-// 	int	i;
-
-// 	i = data->i_max_b;
-// 	max_value_index = (find_index_of_max_value(data) + 1) % (i + 1);
-// 	while (--i > 0)
-// 	{
-// 		under = data->stack_b[max_value_index % (data->i_max_b + 1)];
-// 		above = data->stack_b[(max_value_index + 1) % (data->i_max_b + 1)];
-// 		if (under > above)
-// 			return (0);
-// 		max_value_index++;
-// 	}
-// 	return (1);
-// }
 
 int	check_if_int(char *s)
 {

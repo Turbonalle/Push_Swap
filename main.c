@@ -35,13 +35,8 @@ int	main(int ac, char *av[])
 		i++;
 	}
 	//turk_sort(&data);
-	//merge_sort(&data);
-	while (i-- > 0)
-		push(&data, 'b');
-	if (rev_order(&data))
-		printf("Order: YES!\n");
-	else
-		printf("Order: NO!\n");
+	merge_sort(&data);
+	//test_order(&data);
 	free(data.stack_a);
 	free(data.stack_b);
 	return (0);

@@ -74,16 +74,26 @@ int	min_value(t_list *data)
 	return (min);
 }
 
-int	find_index_of_max_value(t_list *data)
+int	find_index_of_max_value(t_list *data, char c)
 {
+	int *stack;
 	int	max_value_index;
 	int	i;
 
-	max_value_index = 0;
-	i = -1;
-	while (++i < (data->i_max_a + 1))
+	if (c == 'a')
 	{
-		if (data->stack_a[max_value_index] < data->stack_a[i])
+		stack = data->stack_a;
+		i = data->i_max_a;
+	}
+	else
+	{
+		stack = data->stack_b;
+		i = data->i_max_b;
+	}
+	max_value_index = i;
+	while (--i >= 0)
+	{
+		if (stack[max_value_index] < stack[i])
 			max_value_index = i;
 	}
 	return (max_value_index);
@@ -98,15 +108,15 @@ int	find_index_of_min_value(t_list *data, char c)
 	if (c == 'a')
 	{
 		stack = data->stack_a;
+		i = data->i_max_a;
 	}
 	else
 	{
 		stack = data->stack_b;
-		
+		i = data->i_max_b;
 	}
-	min_value_index = 0;
-	i = -1;
-	while (++i < (data->i_max_a + 1))
+	min_value_index = i;
+	while (--i >= 0)
 	{
 		if (stack[min_value_index] > stack[i])
 			min_value_index = i;

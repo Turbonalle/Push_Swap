@@ -20,8 +20,8 @@ void	find_position_in_a(t_list *data)
 	int	top_b;
 
 	top_b = data->stack_b[data->i_max_b];
-	max_a = find_index_of_max_value(data);
-	min_a = find_index_of_min_value(data);
+	max_a = find_index_of_max_value(data, 'a');
+	min_a = find_index_of_min_value(data, 'a');
 	if (top_b > data->stack_a[max_a] || top_b < data->stack_a[min_a])
 		pos_a = min_a;
 	else
@@ -116,6 +116,6 @@ void	turk_sort(t_list *data)
 			find_position_in_a(data);
 			push(data, 'a');
 		}
-		shift_a(data, find_index_of_min_value(data));
+		shift_a(data, find_index_of_min_value(data, 'a'));
 	}
 }

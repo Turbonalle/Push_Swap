@@ -45,7 +45,7 @@ int		bigger(int a, int b);
 int		max_index(t_list *data, char c);
 int		max_value(t_list *data, char c);
 int		min_value(t_list *data);
-int		find_index_of_max_value(t_list *data);
+int		find_index_of_max_value(t_list *data, char c);
 int		find_index_of_min_value(t_list *data, char c);
 int		check_if_int(char *s);
 int		check_int_minmax(const char *str);
@@ -76,6 +76,7 @@ void	merge_sort(t_list *data);
 void	test_commands(t_list *data);
 void	test_sort_max_3(t_list *data);
 void	test_order(int *stack, char c);
+void	test_order_both(t_list *data);
 void	display_stacks(t_list *data);
 
 #endif

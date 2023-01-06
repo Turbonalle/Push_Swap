@@ -96,3 +96,20 @@ void	display_stacks(t_list *data)
 	}
 	printf("\n");
 }
+
+void test_order_both(t_list *data)
+{
+	int i;
+
+	i = data->i_max_a;
+	if (order(data))
+		printf("Order: YES!\n");
+	else
+		printf("Order: NO!\n");
+	while (i-- >= 0)
+		push(data, 'b');
+	if (rev_order(data))
+		printf("Reverse: YES!\n");
+	else
+		printf("Reverse: NO!\n");
+}

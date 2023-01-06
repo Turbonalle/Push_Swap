@@ -1,11 +1,6 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-// void rev_order(t_list *data)
-// {
-
-// }
-
 void merge_sort(t_list *data)
 {
 	int i;

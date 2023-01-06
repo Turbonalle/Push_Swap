@@ -6,7 +6,7 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:52:38 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/05 16:10:44 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/06 11:19:25 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sort_three(t_list *data)
 		swap(data, 'a');
 	if (data->stack_a[0] == min_value(data))
 		reverse(data, 'a');
-	if (data->stack_a[data->i_max_a] == max_value(data))
+	if (data->stack_a[data->i_max_a] == max_value(data, 'a'))
 		rotate(data, 'a');
 }
 
@@ -50,7 +50,7 @@ void	make_stack_descending(t_list *data)
 		return ;
 	if (data->stack_a[0] == min_value(data))
 		reverse(data, 'a');
-	if (data->stack_a[data->i_max_a] == max_value(data))
+	if (data->stack_a[data->i_max_a] == max_value(data, 'a'))
 		rotate(data, 'a');
 }
 

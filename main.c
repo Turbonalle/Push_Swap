@@ -6,7 +6,7 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:08:44 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/05 12:16:34 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/06 12:49:46 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ int	main(int ac, char *av[])
 			return (0);
 		i++;
 	}
-	turk_sort(&data);
+	//turk_sort(&data);
+	//merge_sort(&data);
+	while (i-- > 0)
+		push(&data, 'b');
+	if (rev_order(&data))
+		printf("Order: YES!\n");
+	else
+		printf("Order: NO!\n");
+	free(data.stack_a);
+	free(data.stack_b);
 	return (0);
 }

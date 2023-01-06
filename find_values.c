@@ -6,24 +6,56 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:08:32 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/05 14:51:27 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/06 13:12:38 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	max_value(t_list *data)
+int	max_value(t_list *data, char c)
 {
 	int	i;
 	int	max;
+	int *stack;
 
-	i = data->i_max_a;
-	max = data->stack_a[i];
+	if (c == 'a')
+	{
+		stack = data->stack_a;
+		i = data->i_max_a;
+	}
+	else
+	{
+		stack = data->stack_b;
+		i = data->i_max_b;
+	}
+	max = stack[i];
 	while (--i >= 0)
 	{
-		if (max < data->stack_a[i])
-			max = data->stack_a[i];
+		if (max < stack[i])
+			max = stack[i];
 	}
+
+
+	// if (c == 'a')
+	// {
+	// 	i = data->i_max_a;
+	// 	max = data->stack_a[i];
+	// 	while (--i >= 0)
+	// 	{
+	// 		if (max < data->stack_a[i])
+	// 			max = data->stack_a[i];
+	// 	}
+	// }
+	// if (c == 'b')
+	// {
+	// 	i = data->i_max_b;
+	// 	max = data->stack_b[i];
+	// 	while (--i >= 0)
+	// 	{
+	// 		if (max < data->stack_b[i])
+	// 			max = data->stack_b[i];
+	// 	}
+	// }
 	return (max);
 }
 
@@ -57,16 +89,26 @@ int	find_index_of_max_value(t_list *data)
 	return (max_value_index);
 }
 
-int	find_index_of_min_value(t_list *data)
+int	find_index_of_min_value(t_list *data, char c)
 {
 	int	min_value_index;
+	int *stack;
 	int	i;
 
+	if (c == 'a')
+	{
+		stack = data->stack_a;
+	}
+	else
+	{
+		stack = data->stack_b;
+		
+	}
 	min_value_index = 0;
 	i = -1;
 	while (++i < (data->i_max_a + 1))
 	{
-		if (data->stack_a[min_value_index] > data->stack_a[i])
+		if (stack[min_value_index] > stack[i])
 			min_value_index = i;
 	}
 	return (min_value_index);

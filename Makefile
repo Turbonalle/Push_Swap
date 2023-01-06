@@ -4,7 +4,7 @@ MAIN = main.c
 EXE = push_swap
 SRC =	commands.c compare_numbers.c find_values.c initialize.c \
 		push_swap.c rotate_stacks.c sorting_functions.c \
-		tests_and_extra_functions.c validity_checks.c
+		tests_and_extra_functions.c validity_checks.c merge_sort.c
 OBJECTS = *.o
 HEADER = push_swap.h
 FLAGS = -Wall -Wextra -Werror -g

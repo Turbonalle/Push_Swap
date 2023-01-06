@@ -6,7 +6,7 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:08:25 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/05 15:50:00 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/06 11:22:36 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	swap(t_list *data, char c)
 	write(1, "s", 1);
 	write(1, &c, 1);
 	write(1, "\n", 1);
+	display_stacks(data);
 }
 
 void	push(t_list *data, char c)
@@ -54,6 +55,7 @@ void	push(t_list *data, char c)
 	write(1, "p", 1);
 	write(1, &c, 1);
 	write(1, "\n", 1);
+	display_stacks(data);
 }
 
 void	rotate(t_list *data, char c)
@@ -80,6 +82,7 @@ void	rotate(t_list *data, char c)
 	write(1, "r", 1);
 	write(1, &c, 1);
 	write(1, "\n", 1);
+	display_stacks(data);
 }
 
 void	reverse(t_list *data, char c)
@@ -106,4 +109,5 @@ void	reverse(t_list *data, char c)
 	write(1, "rr", 2);
 	write(1, &c, 1);
 	write(1, "\n", 1);
+	display_stacks(data);
 }

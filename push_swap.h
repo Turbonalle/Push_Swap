@@ -6,7 +6,7 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:08:56 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/06 13:08:42 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/09 10:02:49 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ int		index_to_push(t_list *data);
 void	push_element(t_list *data, int index);
 void	shift_a(t_list *data, int index);
 void	make_stack_descending(t_list *data);
-void	turk_sort(t_list *data);
-void	merge_sort(t_list *data);
+void	sort_merge(t_list *data);
+void	sort_only_a(t_list *data);
+void	sort_turk(t_list *data);
+void	sort_two_halves(t_list *data);
 void	test_commands(t_list *data);
 void	test_sort_max_3(t_list *data);
 void	test_order(int *stack, char c);

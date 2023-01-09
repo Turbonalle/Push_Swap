@@ -3,8 +3,9 @@ NAME = libpush_swap.a
 MAIN = main.c
 EXE = push_swap
 SRC =	commands.c compare_numbers.c find_values.c initialize.c \
-		push_swap.c rotate_stacks.c sorting_functions.c \
-		tests_and_extra_functions.c validity_checks.c merge_sort.c
+		sort_turk.c rotate_stacks.c sorting_functions.c \
+		tests_and_extra_functions.c validity_checks.c sort_two_halves.c \
+		sort_only_a.c sort_merge.c
 OBJECTS = *.o
 HEADER = push_swap.h
 FLAGS = -Wall -Wextra -Werror -g

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   sort_turk.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:08:50 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/05 16:08:41 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/09 09:12:44 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	push_element(t_list *data, int index)
 	push(data, 'b');
 }
 
-void	turk_sort(t_list *data)
+void	sort_turk(t_list *data)
 {
 	int	i;
 

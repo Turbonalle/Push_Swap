@@ -6,7 +6,7 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:09:13 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/06 13:06:13 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/09 07:58:32 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ int	order(t_list *data)
 		under = data->stack_a[max_value_index % (data->i_max_a + 1)];
 		above = data->stack_a[(max_value_index + 1) % (data->i_max_a + 1)];
 		if (under < above)
+		{
+			//printf("A - Order: NO!\n");
 			return (0);
+		}
 		max_value_index++;
 	}
+	//printf("A - Order: YES!\n");
 	return (1);
 }
 
@@ -48,9 +52,13 @@ int rev_order(t_list *data)
 		above = data->stack_b[(max_value_index + 1) % (data->i_max_b + 1)];
 		//printf("under = %d, above = %d\n", under, above);
 		if (under > above)
+		{
+			//printf("B - Order: NO!\n");
 			return (0);
+		}
 		max_value_index++;
 	}
+	//printf("B - Order: YES!\n");
 	return (1);
 }
 

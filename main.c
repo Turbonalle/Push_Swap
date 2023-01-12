@@ -6,7 +6,7 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:08:44 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/12 15:57:46 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/12 17:29:47 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int ac, char *av[])
 			return (0);
 		i++;
 	}
-	display_stacks(&data);
+	//display_stacks(&data);
 	data.moves = 0;
 	//test_commands(&data);
 	//sort_merge(&data);

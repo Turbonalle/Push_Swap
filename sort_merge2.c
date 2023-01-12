@@ -220,36 +220,15 @@ void sort_merge2(t_list *data)
 		sm(data, data->i_max_a + 1, 1);
 }
 
-
 /*
 
-FAIL!
+OPTIMIZING!!!
 
-3 1 2 4 6 7 5
+1. In lap 1, after organizing first half:
+	- Don't reverse to top.
+	- Instead, go straight to organinizing second half (so skip rotating before that).
 
-1 5 6 9 8 7 2 4 3
-
-8 1 2 9 10 11 6 7 5 4 3 
-
-1 4 8 3 10 11 9 5 13 12 7 6 2 
-
-4 9 6 5 13 15 14 11 1 2 7 3 12 10 8 
-
-
- 5 16  8 13  6  1 15 18  3  4  7  9 12 17 14 10 11  2
-15 11 14  4  3  7  5 17  6  8 12  1 16 18  2 10 13  9
-13  7 15  4  8 10  1 16  5  2  3  9 18 11 17 14 12  6
-
-
-SUCCESS!
-
- 1  8 17 14  7 10 11 16  9  5  6  3  2 12 15 18 13  4
-14 17 10  2  5  3  4  1  6 16  9 11 18 12  8 15  7 13
- 7 17  9 18 11  4  1  3 13  2 15 16  8 12 10 14  5  6
- 7 16 11  5 18 14  6 10  9  1 12 17 15  2  3  8 13  4
- 9  7  4 15  3  1  6 13 11 12  8 18 16 10 17  5  2 14
- 5 16  8  2  6 13 18 11 12 14  4 10  9 15  7  1  3 17
- 4 10  7  8 12 16  1  5  2 18 15 11 13  6 17  9  3 14
+2. Skip unnecessary rot+rev
 
 
 */

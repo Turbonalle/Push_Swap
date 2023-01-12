@@ -6,7 +6,7 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:08:34 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/05 13:08:01 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:56:36 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int	init_list(t_list *data, int size)
 		size--;
 	}
 	data->i_max_b = -1;
+	data->moves = 0;
 	return (1);
 }

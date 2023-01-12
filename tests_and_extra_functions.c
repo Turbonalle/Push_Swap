@@ -6,7 +6,7 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:09:08 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/09 11:36:39 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:48:27 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 
 void	test_commands(t_list *data)
 {
-	rotate(data, 'a');
+	// rotate(data, 'a');
 	push(data, 'b');
 	push(data, 'b');
 	push(data, 'b');
 	push(data, 'b');
-	push(data, 'b');
-	swap(data, 's');
-	reverse(data, 'r');
-	push(data, 'a');
-	swap(data, 'a');
-	rotate(data, 'r');
+	// push(data, 'b');
+	// push(data, 'b');
+	// push(data, 'b');
+	// push(data, 'b');
+	// swap(data, 's');
+	// reverse(data, 'r');
+	// push(data, 'a');
+	// swap(data, 'a');
+	// rotate(data, 'r');
 }
 
 void	test_sort_max_3(t_list *data)
@@ -59,6 +62,8 @@ void display_stacks(t_list *data)
 
 	ia = data->i_max_a;
 	ib = data->i_max_b;
+	data->moves++;
+	printf("Moves = %d\n", data->moves);
 	printf("\n");
 	while (ia > ib)
 	{
@@ -77,23 +82,6 @@ void display_stacks(t_list *data)
 	}
 	printf("\n");
 }
-
-// void	display_stacks(t_list *data)
-// {
-// 	int	ia;
-// 	int	ib;
-
-// 	ia = data->i_max_a;
-// 	ib = data->i_max_b;
-// 	if (ia < ib)
-// 		ia = ib;
-// 	while (ia > -1)
-// 	{
-// 		printf("aa[%d] = %d\tbb[%d] = %d\n", ia, data->stack_a[ia], ia, data->stack_b[ia]);
-// 		ia--;
-// 	}
-// 	printf("\n");
-// }
 
 void test_order_both(t_list *data)
 {

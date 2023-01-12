@@ -6,7 +6,7 @@
 /*   By: jbagger <jbagger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:08:56 by jbagger           #+#    #+#             */
-/*   Updated: 2023/01/11 10:06:12 by jbagger          ###   ########.fr       */
+/*   Updated: 2023/01/12 11:43:01 by jbagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_list
 	int	*stack_b;
 	int	i_max_a;
 	int	i_max_b;
+	int moves;
 }		t_list;
 typedef struct s_steps
 {
